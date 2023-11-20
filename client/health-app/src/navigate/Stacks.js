@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 
-import Products from "../screens/Products"
+import PedometerAPP from "../screens/PedometerAPP"
 /* import Pokemons from "../screens/Pokemons"
 import Home from "../screens/Home"
 import Movies from "../screens/Movies"
@@ -53,9 +53,9 @@ const Stacks = () => {
             options={{ title: "Login" }} // Personaliza el título del encabezado
         />
         <Stack.Screen
-            name="Products"
-            component={Products}
-            options={{ title: "Products" }} // Personaliza el título del encabezado
+            name="PedometerAPP"
+            component={PedometerAPP}
+            options={{ title: "Pedometer" }} // Personaliza el título del encabezado
         />
         {/* <Stack.Screen
             name="Pokemons"

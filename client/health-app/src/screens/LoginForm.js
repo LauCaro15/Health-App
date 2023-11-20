@@ -40,7 +40,7 @@ const LoginForm = () => {
         "Inicio de sesión exitoso",
         "¡Bienvenido!"
       );
-      navigation.navigate("Products");
+      navigation.navigate("PedometerAPP");
     } catch (error) {
       console.error("Error de inicio de sesión:", error);
       Alert.alert(
