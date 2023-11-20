@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
+
+// import MainNavigator from './src/navigate/MainNavigator';
+import Stacks  from './src/navigate/Stacks';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [userRegistered,setUserRegistered] = useState(false);
+
+  const handleRegistrationComplete = ()=> {
+    setUserRegistered(!userRegistered);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+
+      <Stacks></Stacks>
+      {/* <MainNavigator></MainNavigator> */}
+
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
