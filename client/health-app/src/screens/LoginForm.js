@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
-  const ip = "192.168.20.20";
+  const ip = "192.168.90.63";
 
   const handleLogin = async () => {
     console.log("Email", email);
