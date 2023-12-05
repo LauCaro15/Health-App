@@ -7,7 +7,7 @@ const { DB_HOST, DB_PASSWORD, DB_USER, IP_SERVER, API_PATH, PORT} = require("./c
 const app = require("./app");
 
 // mongodb+srv://camilo21:<password>@cluster0.du3uwnv.mongodb.net/
-const connection_string = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/health-app?retryWrites=true&w=majority`
+const connection_string = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/blog-app?retryWrites=true&w=majority`
 
 //Conexión a la base de datos
 mongoose

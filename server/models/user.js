@@ -6,7 +6,8 @@ const userSchema = mongoose.Schema({
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true},
     active: {  type: Boolean, require: true, default: false},
-    rol: { type: String, require: true },
 });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;

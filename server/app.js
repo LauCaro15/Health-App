@@ -5,6 +5,9 @@ const bodyParser = require("body-parser")
 // Importación de archivos
 const {API_PATH} = require("./config")
 const userRoutes = require("./routes/user")
+const clientRoutes = require("./routes/client")
+const postRoutes = require("./routes/post")
+const adminRoutes = require("./routes/admin")
 
 const cors = require('cors')
 
@@ -20,5 +23,8 @@ app.use(bodyParser.json());
 
 // Configuración de cabeceras
 app.use(`/${API_PATH}/users`, userRoutes);
+app.use(`/${API_PATH}/clients`, clientRoutes);
+app.use(`/${API_PATH}/posts`, postRoutes);
+app.use(`/${API_PATH}/admins`, adminRoutes);
 
 module.exports = app;
