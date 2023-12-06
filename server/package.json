@@ -1,7 +1,7 @@
 {
-  "name": "health-app",
+  "name": "blog-app",
   "version": "1.0.0",
-  "description": "A simple backend with mongoDB for the health-app",
+  "description": "A simple backend with mongoDB for the blog-app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
