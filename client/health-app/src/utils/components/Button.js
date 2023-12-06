@@ -13,11 +13,12 @@ const TheButton = ({
 	width = 'auto' ,
 	height = 'auto' , // "1x" | "2x" | "3x" | "4x" 
 	isDisabled = false ,
-	type = "solid" , // "solid" | "outline" | "clear" | "icon"
+	type = "solid" , // "solid" | "outline" | "clear" | "icon" | "circle"
 	color = c.primary.base ,
 	iconName = undefined ,
 	uppercase = false ,
 	iconPosition = "left" , // "left" | "right" | "top" | "bottom"
+	iconSize = undefined ,
 	onPressAction = () => Alert.alert(
 		title = "Botón Presionado" ,
 		'Botón : "' + ( (text) ? text : iconName ) + '"' ,
@@ -41,13 +42,16 @@ const TheButton = ({
 
 	let colorButton = color ;
 
-	let iconSize = s.tiny.t6 ;
+	let theIconSize = ( !iconSize ) ? s.tiny.t6 : iconSize ;
 	let paddingSize = s.tiny.t6 ;
 
 	if ( type === "icon" ) {
 		type = "clear"
-		iconSize = s.tiny.t8 ;
+		theIconSize = ( !iconSize ) ? s.tiny.t8 : iconSize ;
 		paddingSize = 0 ;
+	} else if ( type === "circle" ) {
+		type = "solid"
+		paddingSize = s.tiny.t15 ;
 	} else if ( !text ) {
 		paddingSize = s.tiny.t3 ;
 	} else if ( size === 'sm') {
@@ -72,6 +76,8 @@ const TheButton = ({
 			break;
 	}
 
+	let radius = ( type === "circle" ) ? s.medium.m10 : 'lg'
+
 	return (
 
 		<Button
@@ -81,12 +87,13 @@ const TheButton = ({
 				type === "outline" && { ...styles.outlined , borderColor: colorButton } ,
 				{ paddingHorizontal: paddingSize } ,
 				{ width: width , maxWidth: '100%' } ,
-				{ height: height }
+				{ height: height } ,
+				type === "circle" && { borderRadius: s.medium.m10 }
 			]}
 			color = {colorButton}
 			type = {type}
 			size = {size}
-			radius='lg'
+			radius = { ( typeof( radius ) === "number" ) ? Number(radius) : 'lg'}
 			containerStyle = { styles.container }
 
 			onPress = {onPressAction}
@@ -96,7 +103,7 @@ const TheButton = ({
 					<Icon
 						name = {iconName}
 						color = {colorContent}
-						size = {iconSize}
+						size = {theIconSize}
 					/>
 				)
 			}

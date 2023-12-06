@@ -5,6 +5,7 @@ import Styles from '../Styles'
 import TheIcon from './components/Icon'
 import TheButton from './components/Button'
 import TheCard , { TheImageCard , TheColorBlockCard , ThePostCard } from './components/Card'
+import ThePost from './components/Post'
 import TheFlatList from './components/FlatList'
 import TheInputText from './components/InputText'
 import TheDropdown from './components/Dropdown'
@@ -32,7 +33,7 @@ export const Button = TheButton ;
 export const Card = TheCard ;
 export const ImageCard = TheImageCard ;
 export const ColorBlockCard = TheColorBlockCard ;
-export const PostCard = ThePostCard ;
+export const Post = ThePost ;
 export const FlatList = TheFlatList ;
 export const InputText = TheInputText ;
 export const Dropdown = TheDropdown ;
