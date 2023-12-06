@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
-  const ip = "192.168.90.63";
+  const ip = "192.168.1.2";
 
   const handleLogin = async () => {
     console.log("Email", email);
@@ -40,7 +40,7 @@ const LoginForm = () => {
         "Inicio de sesión exitoso",
         "¡Bienvenido!"
       );
-      navigation.navigate("PedometerAPP");
+      navigation.navigate("Posts");
     } catch (error) {
       console.error("Error de inicio de sesión:", error);
       Alert.alert(

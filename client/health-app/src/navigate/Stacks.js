@@ -9,6 +9,7 @@ import Movies from "../screens/Movies"
 import Posts from "../screens/Posts" */
 import RegisterForm from '../screens/RegisterForm';
 import LoginForm from '../screens/LoginForm';
+import PostsListTest from '../utils/tests/PostsListTest';
 /* import Case1 from "../screens/Case1" */
 // import MainNavigator from './MainNavigator';
 
@@ -53,10 +54,15 @@ const Stacks = () => {
             options={{ title: "Login" }} // Personaliza el título del encabezado
         />
         <Stack.Screen
+            name="Posts"
+            component={PostsListTest}
+            options={{ title: "Posts" }} // Personaliza el título del encabezado
+        />
+        {/* <Stack.Screen
             name="PedometerAPP"
             component={PedometerAPP}
             options={{ title: "Pedometer" }} // Personaliza el título del encabezado
-        />
+        /> */}
         {/* <Stack.Screen
             name="Pokemons"
             component={Pokemons}

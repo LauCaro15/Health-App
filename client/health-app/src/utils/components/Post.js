@@ -1,8 +1,9 @@
-import React , { memo } from "react" ;
+import React , { memo , useEffect , useState } from "react" ;
 import { c } from "../basics/Colors" ;
 import { s } from "../basics/Sizes" ;
 import gs from "../../Styles" ;
 import { StyleSheet , View , Text } from "react-native" ;
+import AsyncStorage from '@react-native-async-storage/async-storage' ;
 import Swiper from "./Swiper" ;
 import Button from "./Button" ;
 import Modal from "./Modal" ;
@@ -21,6 +22,8 @@ export const ThePost = memo ( ({
 	isSeeMoreActive = false ,
 	
 }) => {
+
+    const [ isUserLoggedIn , setIsUserLoggedIn ] = useState(false);
 
 	if ( isSeeMoreActive ) {
 		buttons.unshift(
@@ -54,6 +57,15 @@ export const ThePost = memo ( ({
 			</Modal>
 		);
 	}
+
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+        const userToken = await AsyncStorage.getItem('accessToken');
+        setIsUserLoggedIn(userToken !== null);
+        } ;
+    
+        checkLoginStatus();
+    }, []);
 
 	return (
 		<Card 
@@ -102,7 +114,8 @@ export const ThePost = memo ( ({
 				{ justifyContent: 'flex-end' } , 
 				styles.contentItem ,
 				( buttons.length<=0 ) ? {display: 'none'} : null ,
-				{ marginVertical: s.tiny.t1 * -1  }
+				{ marginVertical: s.tiny.t1 * -1  } ,
+                ( !isUserLoggedIn ) ? { display: 'none' } : null
 				]}>
 				{buttons}
 			</View>

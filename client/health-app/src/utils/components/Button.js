@@ -3,7 +3,7 @@ import { c } from "../basics/Colors" ;
 import { s } from "../basics/Sizes" ;
 import gs from "../../Styles" ;
 import Icon from './Icon' ;
-import { StyleSheet , Alert } from "react-native" ;
+import { StyleSheet , Alert , Text } from "react-native" ;
 import { Button } from "@rneui/base" ;
 
 const TheButton = ({

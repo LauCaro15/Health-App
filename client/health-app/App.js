@@ -18,8 +18,10 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      {/* <Stacks></Stacks> */}
-      <TestsSample/>
+      <Stacks>
+        <TestsSample/>
+      </Stacks>
+      
       {/* <MainNavigator></MainNavigator> */}
 
     </NavigationContainer>
