@@ -68,6 +68,9 @@ const PostsListTest = (  ) => {
     const [ userRole , setUserRole ] = useState( 'guess' ) ;
     const navigation = useNavigation() ;
 
+    const ip = "192.168.1.2" ;
+    const url = `http://${ip}:3000/api/v1/posts` ;
+
     useEffect( () => {
         const checkLoginStatus = async () => {
             const userToken = await AsyncStorage.getItem( 'accessToken' ) ;
@@ -85,6 +88,31 @@ const PostsListTest = (  ) => {
         navigation.navigate('Login') ;
     } ;
 
+    const handleLikePost = async ( postId ) => {
+
+        console.log( "Post id : ", postId ) ;
+
+        try {
+            const response = await axios.post( url+`/like` , { id: postId } ) ;
+            console.log( response.data ) ;
+        } catch ( error ) {
+            console.error( error );
+        }
+    }
+
+    const handleCollectPost = async ( postId ) => {
+
+        console.log( "Post id : ", postId ) ;
+
+        try {
+            const response = await axios.post( url+`/collect` , { id: postId } ) ;
+            console.log( response.data ) ;
+        } catch ( error ) {
+            console.error( error );
+        }
+    }
+
+
     //console.log( posts ) ;
 
     const renderPost = ( item ) => {
@@ -98,6 +126,7 @@ const PostsListTest = (  ) => {
                     <Button 
                         iconName='bookmark' type="icon" size='sm' key="Save" 
                         onPressAction={ () => {
+                            handleCollectPost( item.item.id ) ;
                             Alert.alert(
                                 title = "Post Guardado" ,
                                 'Se ha guardado el post : "' + item.item.title + '" con id : ' + item.item.id ,
@@ -111,6 +140,7 @@ const PostsListTest = (  ) => {
                     <Button 
                         iconName='heart' type="icon" size='sm' key="Like" 
                         onPressAction={ () => {
+                            handleLikePost( item.item.id ) ;
                             Alert.alert(
                                 title = "Me Gusta Post" ,
                                 'Le ha dado me gusta guardado al post : "' + item.item.title + '" con id : ' + item.item.id ,
