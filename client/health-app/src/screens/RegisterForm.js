@@ -17,7 +17,7 @@ const RegisterForm = () => {
 
   navigator = useNavigation();
 
-  const ip = "192.168.1.2";
+  const ip = "192.168.10.17";
   const handleSubmit = () => {
     if (!policyAccepted) {
       // Si el usuario no ha aceptado la política de privacidad, no permite el registro.

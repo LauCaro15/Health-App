@@ -11,7 +11,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
-  const ip = "192.168.1.2";
+  const ip = "192.168.10.17";
 
   const handleLogin = async () => {
     console.log("Email", email);
@@ -62,15 +62,15 @@ const LoginForm = () => {
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>Iniciar Sesión</Text>
-        {/* <InputText 
-          label="Correo Electrónico" 
-          placeholder="example@test.com" 
-          iconName="mail" 
+        {/* <InputText
+          label="Correo Electrónico"
+          placeholder="example@test.com"
+          iconName="mail"
           setTextFunction={setEmail}
         /> */}
-        {/* <InputText 
-          label="Correo Electrónico" 
-          placeholder="********" 
+        {/* <InputText
+          label="Correo Electrónico"
+          placeholder="********"
           setTextFunction={setPassword}
           isPassword={true}
         /> */}

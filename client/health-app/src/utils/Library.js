@@ -10,8 +10,8 @@ import TheFlatList from './components/FlatList'
 import TheInputText from './components/InputText'
 import TheDropdown from './components/Dropdown'
 import TheMultiSelect from './components/MultiSelect'
-import TheStateController , { 
-    TheCheckBox , TheRadioButton , TheSwitch 
+import TheStateController , {
+    TheCheckBox , TheRadioButton , TheSwitch
 } from './components/StateController'
 import TheModal from './components/Modal'
 
@@ -23,6 +23,9 @@ import DropdownsTest from './tests/DropdownsTest'
 import StateControllersTest from './tests/StateControllersTest'
 import MultiSelectsTest from './tests/MultiSelectsTest'
 import PickersTest from './tests/PickersTest'
+
+import ImagePickerExample from './components/ImagePicker';
+import TheTakePhoto from './components/TakePhoto';
 
 export const c = Colors ;
 export const s = Sizes ;
@@ -43,8 +46,10 @@ export const RadioButton = TheRadioButton ;
 export const Switch = TheSwitch ;
 export const StateController = TheStateController ;
 export const Modal = TheModal ;
+export const ImagePicker = ImagePickerExample;
+export const TakePhoto = TheTakePhoto;
 
-export const Tests = { 
+export const Tests = {
     Buttons: ButtonsTest  ,
     Cards: CardsTest ,
     Flatlists: FlatListsTest ,
@@ -52,5 +57,5 @@ export const Tests = {
     Dropdowns: DropdownsTest ,
     StateControllers: StateControllersTest ,
     MultiSelects: MultiSelectsTest ,
-    Pickers: PickersTest 
+    Pickers: PickersTest
 }
