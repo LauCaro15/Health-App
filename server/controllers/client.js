@@ -5,17 +5,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require("../utils/jwt");
 
 
-// GET ME
-const getMe = async (req, res) => {
-    try {
-        const client = await Client.findById(req.client.client_id);
-        res.status(200).json(client);
-    } catch (err) {
-        res.status(400).json(client);
-    }
-}
-
-
 //POST
 const register = async (req, res) => {
     const { name, lastname, email, password } = req.body;
@@ -30,8 +19,8 @@ const register = async (req, res) => {
             lastname,
             email: email.toLowerCase(),
             password: final_password,
-            likes: ["1","2"],
-            collections: ["1","2"],
+            likes: [],
+            collections: [],
         });
 
         console.log("Cliente creado:" + new_client);
@@ -90,5 +79,4 @@ module.exports = {
     register,
     login,
     getAll,
-    getMe,
 }
