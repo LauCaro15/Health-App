@@ -53,12 +53,13 @@ const login = async (req, res) => {
         if (!clientStore.active) {
             throw new Error("Usuario no autorizado o no activo");
         }
-        
+        const token = jwt.createAccessToken(clientStore);
+
         const decoded = jwt.verifyToken(token, JWT_SECRET_KEY);
         console.log('Token decodificado:', decoded);
     
         res.status(200).send({
-            access: jwt.createAccessToken(clientStore),
+            access: token,
             rol: decoded.role,
         });
     } catch (error) {
