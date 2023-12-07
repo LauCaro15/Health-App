@@ -29,7 +29,7 @@ export const TheCheckBox = ({
             checkedColor = { (isDisabled) ? disabledColor : c.primary.base }
             uncheckedColor = { (isDisabled) ? disabledColor : c.primary.base }
             
-            containerStyle = {[ styles.resize ]}
+            containerStyle = {[ styles.resize , { backgroundColor: 'transparent' } ]}
             center = {true}
 
             disabled = {isDisabled}

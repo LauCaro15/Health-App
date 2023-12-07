@@ -36,7 +36,7 @@ const Stacks = () => {
 
   return (
     <Stack.Navigator
-    initialRouteName="Login"
+    initialRouteName="Posts"
     >
         {/* <Stack.Screen
             name="Home"

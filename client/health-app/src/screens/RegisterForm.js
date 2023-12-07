@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, Button, StyleSheet, TouchableOpacity, Modal, Linking, ScrollView } from 'react-native';
+import { Text, View, TextInput, StyleSheet, TouchableOpacity, Modal, Linking, ScrollView } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import PrivacyPolicies from './PrivacyPolicies';
+import { Button , InputText , CheckBox } from '../utils/Library' ;
 
 const RegisterForm = () => {
   const [userName, setUserName] = useState('');
@@ -98,7 +99,7 @@ const RegisterForm = () => {
         {/* Agregar el CheckBox para la política de privacidad */}
         <View style={{margin: 10}}>
           <View style={styles.checkboxContainer}>
-            <Checkbox value={policyAccepted} onValueChange={handleCheckboxChange} />
+            <CheckBox variable={policyAccepted} onPressFunction={handleCheckboxChange} />
             <Text style={styles.checkboxLabel}>He leído y Acepto la política de privacidad</Text>
           </View>
           <TouchableOpacity
@@ -128,12 +129,12 @@ const RegisterForm = () => {
             </ScrollView>
           </Modal>
         </View>
-        <Button title = 'Registrarse' onPress = {handleSubmit} />
+        <Button text = 'Registrarse' onPressAction = {handleSubmit} />
       </View>
 
       <View>
         <Text style={styles.text}>¿Ya tienes una cuenta?</Text>
-        <Button title="Iniciar sesión" onPress={goToLogin} />
+        <Button text="Iniciar sesión" onPressAction={goToLogin} />
       </View>
     </View>
   );

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, Alert} from 'react-native';
+import { View, Text, StyleSheet, TextInput, Alert} from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button , InputText } from '../utils/Library' ;
 
 const LoginForm = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -61,13 +62,24 @@ const LoginForm = () => {
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>Iniciar Sesión</Text>
+        {/* <InputText 
+          label="Correo Electrónico" 
+          placeholder="example@test.com" 
+          iconName="mail" 
+          setTextFunction={setEmail}
+        /> */}
+        {/* <InputText 
+          label="Correo Electrónico" 
+          placeholder="********" 
+          setTextFunction={setPassword}
+          isPassword={true}
+        /> */}
         <TextInput
           style={styles.input}
           placeholder="Email"
           onChangeText={text => setEmail(text)}
           value={email}
         />
-
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
@@ -75,11 +87,11 @@ const LoginForm = () => {
           onChangeText={text => setPassword(text)}
           value={password}
         />
-        <Button title="Iniciar Sesión" onPress={handleLogin} />
+        <Button text="Iniciar Sesión" onPressAction={handleLogin} />
       </View>
       <View>
         <Text style={styles.text}>¿No tienes una cuenta?</Text>
-        <Button title="Registrarse" onPress={goToRegister} />
+        <Button text="Registrarse" onPressAction={goToRegister} />
       </View>
 
 

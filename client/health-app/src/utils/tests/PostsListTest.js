@@ -26,6 +26,7 @@ import React , { useEffect , useState } from "react" ;
 import gs from "../../Styles" ;
 import { View , Alert } from "react-native" ;
 import { FlatList , Post , Button } from "../Library" ;
+import { useNavigation } from '@react-navigation/native' ;
 import AsyncStorage from '@react-native-async-storage/async-storage' ;
 
 const PostsListTest = (  ) => {
@@ -65,6 +66,7 @@ const PostsListTest = (  ) => {
 
     const [ isUserLoggedIn , setIsUserLoggedIn ] = useState( false ) ;
     const [ userRole , setUserRole ] = useState( 'guess' ) ;
+    const navigation = useNavigation() ;
 
     useEffect( () => {
         const checkLoginStatus = async () => {
@@ -78,6 +80,10 @@ const PostsListTest = (  ) => {
     
         checkLoginStatus();
     } , [] ) ;
+
+    const goToLogin = () => {
+        navigation.navigate('Login') ;
+    } ;
 
     //console.log( posts ) ;
 
@@ -124,6 +130,7 @@ const PostsListTest = (  ) => {
     
 	return (
 		<View style={[ gs.containerTest , { marginHorizontal: -12 } ]}>
+            { ( userRole === 'guess' ) ? <Button text={"Iniciar Sesión"} onPressAction={goToLogin}/> : null }
 			<FlatList 
                 data={posts} 
                 renderFunction={renderPost}

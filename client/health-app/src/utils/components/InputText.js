@@ -40,6 +40,10 @@ const TheInputText = ({
 		iconName = ( isPassword ) ? 'lock' : 'text' ;
 	}
 
+	if ( isPassword ) {
+		setShowContent( false ) ;
+	}
+
 	return (
 		<Input
 			containerStyle = {{ width: window.innerWidth }}
