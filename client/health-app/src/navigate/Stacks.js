@@ -58,6 +58,11 @@ const Stacks = () => {
             component={PostsListTest}
             options={{ title: "Posts" }} // Personaliza el título del encabezado
         />
+        <Stack.Screen
+            name="PostsUser"
+            component={PostsListTest}
+            options={{ title: "Posts" }} // Personaliza el título del encabezado
+        />
         {/* <Stack.Screen
             name="PedometerAPP"
             component={PedometerAPP}

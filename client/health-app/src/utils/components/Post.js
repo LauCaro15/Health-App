@@ -38,7 +38,7 @@ const SeeMoreModal = memo( ({ title , paragraph , multimedia , userRole }) => (
 ) ) ;
 
 
-export const ThePost = memo ( ({
+export const ThePost = ({
     
 	title = "" ,
 	multimedia = [] , // Recibe uris no locales
@@ -118,7 +118,7 @@ export const ThePost = memo ( ({
 		
 	) ;
 
-} ) ;
+} ;
 
 const styles = StyleSheet.create({
 

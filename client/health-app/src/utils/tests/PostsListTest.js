@@ -127,6 +127,8 @@ const PostsListTest = (  ) => {
             />
         );
     };
+
+    console.log( userRole );
     
 	return (
 		<View style={[ gs.containerTest , { marginHorizontal: -12 } ]}>
@@ -137,6 +139,7 @@ const PostsListTest = (  ) => {
                 initialQuantityRender={3}
                 maxRenderPerBatch={2}
             />
+            { ( userRole === 'admin' ) ? <Button text={"Crear Post"} onPressAction={goToLogin}/> : null }
 		</View>
 	) ;
 
