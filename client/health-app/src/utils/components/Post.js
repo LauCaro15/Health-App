@@ -11,7 +11,7 @@ import TheCard from "./Card" ;
 import AsyncStorage from '@react-native-async-storage/async-storage' ;
 
 const SeeMoreModal = memo( ({ title , paragraph , multimedia , userRole }) => (
-	<Modal 
+	<Modal
 		OpenButton={
 			<Button iconName='eye' type="icon" size='sm' key="See" />
 		}
@@ -21,16 +21,16 @@ const SeeMoreModal = memo( ({ title , paragraph , multimedia , userRole }) => (
 				paragraph = {paragraph}
 				images = {multimedia}
 				styleImages={{
-					...( ( userRole == 'admin' ) ? { nameIcon: 'trash' , 
+					...( ( userRole == 'admin' ) ? { nameIcon: 'trash' ,
 						containerIcon: { backgroundColor: c.semantic.error } } : {} ) ,
 					width: s.large.l6 , height: s.medium.m10
 				}}
 				width = '100%'
-			/> 
+			/>
 		}
 		CloseButton={
 			<Button
-				iconName='close' type="circle" size="sm" iconSize={s.tiny.t8} key="Close" 
+				iconName='close' type="circle" size="sm" iconSize={s.tiny.t8} key="Close"
 			/>
 		}
 		>
@@ -39,7 +39,7 @@ const SeeMoreModal = memo( ({ title , paragraph , multimedia , userRole }) => (
 
 
 export const ThePost = ({
-    
+
 	title = "" ,
 	multimedia = [] , // Recibe uris no locales
 	maxQuantity = 5 ,
@@ -49,7 +49,7 @@ export const ThePost = ({
 	buttons = [] ,
 	isSeeMoreActive = false ,
 	userRole = 'guess'
-	
+
 }) => {
 
 	const widthAddSlider = s.medium.m1 ;
@@ -57,7 +57,7 @@ export const ThePost = ({
 	( userRole !== 'client' ) ? buttons=[] : null ;
 
 	if ( isSeeMoreActive ) {
-		buttons.unshift( 
+		buttons.unshift(
 			<SeeMoreModal title={title} paragraph={paragraph} multimedia={multimedia} userRole={userRole}/>
 		) ;
 	}
@@ -65,11 +65,11 @@ export const ThePost = ({
 	//console.log( "Post:" , userRole )
 
 	return (
-		<Card 
-			containerStyle = {[ 
+		<Card
+			containerStyle = {[
 				styles.container ,
-				( width === '100%' ) ? 
-					{ flexGrow: 1 , flexShrink: 0 , flexBasis: '96%' } : 
+				( width === '100%' ) ?
+					{ flexGrow: 1 , flexShrink: 0 , flexBasis: '96%' } :
 					( width === 'auto') ? { flexGrow: 1 , flexShrink: 0 } : { width: width } ,
 				{ paddingHorizontal:  s.tiny.t4 } ,
 				{ justifyContent: 'center' }
@@ -77,47 +77,47 @@ export const ThePost = ({
 		>
 			<View style={[
 				styles.group ,
-				{ justifyContent: 'center' , alignItems: 'center' } , 
+				{ justifyContent: 'center' , alignItems: 'center' } ,
 				styles.contentItem ,
 				( multimedia.length<=0 ) ? {display: 'none'} : null ,
 				{ marginBottom: 0 } ,
 				{ overflow: 'hidden' , alignSelf: 'center' , width: imageSwiperSize + widthAddSlider }
 				]}>
-				<Swiper 
-					multimedia = {multimedia} 
-					width = {imageSwiperSize} 
-					height = {imageSwiperSize} 
+				<Swiper
+					multimedia = {multimedia}
+					width = {imageSwiperSize}
+					height = {imageSwiperSize}
 					maxQuantity = {maxQuantity}
 					widthAddSlider = {widthAddSlider}
 				/>
 			</View>
 
-			<Card.Title style={[ 
-				gs.text  , gs.subtitle , 
-				{ marginBottom: 0 , marginTop: s.tiny.t2 , padding: 0 } , 
-				( !title ) ? { display: 'none' } : null  
+			<Card.Title style={[
+				gs.text  , gs.subtitle ,
+				{ marginBottom: 0 , marginTop: s.tiny.t2 , padding: 0 } ,
+				( !title ) ? { display: 'none' } : null
 			]}> {title} </Card.Title>
 
-			<Text 
-				style={[ 
-					gs.text , 
-					( paragraph === "" ) ? {display: 'none'} : null  , 
+			<Text
+				style={[
+					gs.text ,
+					( paragraph === "" ) ? {display: 'none'} : null  ,
 					styles.contentItem
 				]}
 			>{paragraph}</Text>
 
 			<View style={[
 				styles.group ,
-				{ justifyContent: 'flex-end' } , 
+				{ justifyContent: 'flex-end' } ,
 				styles.contentItem ,
 				( buttons.length<=0 || userRole === 'guess' ) ? {display: 'none'} : null ,
 				{ marginVertical: s.tiny.t1 * -1  }
 				]}>
 				{ buttons}
 			</View>
-		
+
 		</Card>
-		
+
 	) ;
 
 } ;
@@ -125,7 +125,7 @@ export const ThePost = ({
 const styles = StyleSheet.create({
 
 	container: {
-		backgroundColor: c.neutral.greyLightest , 
+		backgroundColor: c.neutral.greyLightest ,
 		borderRadius: s.tiny.t3 ,
 		elevation: 1 ,
 		margin: s.tiny.t3
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
 
 	group: {
 		flex: 1 ,
-		flexDirection: 'row' , 
-		width: '100%' , 
+		flexDirection: 'row' ,
+		width: '100%' ,
 		flexWrap: 'wrap' ,
 	}
 

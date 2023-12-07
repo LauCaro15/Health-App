@@ -22,6 +22,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Configuración de cabeceras
+app.use(express.static("uploads"));
+app.use('/uploads', express.static('uploads'));
 
 app.use(`/${API_PATH}/clients`, clientRoutes);
 app.use(`/${API_PATH}/posts`, postRoutes);

@@ -29,7 +29,31 @@ import { FlatList , Post , Button } from "../Library" ;
 import { useNavigation } from '@react-navigation/native' ;
 import AsyncStorage from '@react-native-async-storage/async-storage' ;
 
-const PostsListTest = (  ) => {
+const PostsListTest = ( ) => {
+    const [postList, setPostList] = useState([]);
+    const ip = "192.168.101.63";
+    const listPosts = () => {
+        const url = `http://${ip}:3500/api/v1/posts`;
+
+        fetch(url)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // console.log("Data posts: ", data);
+            setPostList(data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    }
+
+    useEffect(() => {
+        listPosts();
+    }, [postList]);
 
     let posts = [
         new PostSchema( '1' , 'Gato en el jardín' , 'Un gato disfrutando de la naturaleza.' ,
@@ -69,18 +93,17 @@ const PostsListTest = (  ) => {
     const navigation = useNavigation() ;
     const userId = AsyncStorage.getItem( 'userId' ) ;
 
-    const ip = "192.168.1.2" ;
     const url = `http://${ip}:3000/api/v1/clients/${userId}` ;
 
     useEffect( () => {
         const checkLoginStatus = async () => {
             const userToken = await AsyncStorage.getItem( 'accessToken' ) ;
             setIsUserLoggedIn( userToken !== null ) ;
-            
+
 
             const userRole = await AsyncStorage.getItem( 'role' ) ;
             setUserRole( ( userRole ) ? userRole : 'guess' ) ;
-            console.log( userRole ) ;
+            /* console.log( userRole ) ; */
         } ;
 
         checkLoginStatus();
@@ -120,11 +143,13 @@ const PostsListTest = (  ) => {
     //console.log( posts ) ;
 
     const renderPost = ( item ) => {
-
+        const theImages = item.item.images.map((imagesUri, index) => (
+            `http://${ip}:3500/${imagesUri}`
+        ))
         return(
             <Post
                 title={item.item.title}
-                multimedia={item.item.multimedia}
+                multimedia={theImages}
                 paragraph={item.item.description}
                 buttons={ [
                     <Button
@@ -162,13 +187,13 @@ const PostsListTest = (  ) => {
         );
     };
 
-    console.log( userRole );
+    /* console.log( userRole ); */
 
 	return (
 		<View style={[ gs.containerTest , { marginHorizontal: -12 } ]}>
             { ( userRole === 'guess' ) ? <Button text={"Iniciar Sesión"} onPressAction={goToLogin}/> : null }
 			<FlatList
-                data={posts}
+                data={postList}
                 renderFunction={renderPost}
                 initialQuantityRender={3}
                 maxRenderPerBatch={2}

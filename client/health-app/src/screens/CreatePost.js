@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Image, View, Platform, Modal, StyleSheet, TextInput, FlatList, Text } from 'react-native';
 import axios from 'axios';
 import { Surface } from '@react-native-material/core';
+import { useNavigation } from '@react-navigation/native';
 import { Button, InputText, ImagePicker, TakePhoto } from '../utils/Library';
 
 const CreatePost = () => {
   const [images, setImages] = useState([]); // Para almacenar las imágenes seleccionadas
-  const [postList, setPostList] = useState([]);
+  
   const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
   const [newPost, setNewPost] = useState({
     title: '',
     description: '',
@@ -17,7 +19,7 @@ const CreatePost = () => {
     active: false
   });
 
-  const ip = "192.168.10.17";
+  const ip = "192.168.101.63";
 
   const handleCreatePost = () => {
     const formData = new FormData();
@@ -80,28 +82,7 @@ const CreatePost = () => {
     }
   };
 
-  const listPosts = () => {
-    const url = `http://${ip}:3500/api/v1/posts`;
 
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // console.log("Data posts: ", data);
-        setPostList(data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  useEffect(() => {
-    listPosts();
-  }, [postList]);
 
   return (
     <View style={{ flex: 1, alignContent: 'center', justifyContent: 'space-between' }}>
