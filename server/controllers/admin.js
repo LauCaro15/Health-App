@@ -54,7 +54,7 @@ const login = async (req, res) => {
             throw new Error("Usuario no autorizado o no activo");
         }
         
-        const decoded = jwt.verify(token, JWT_SECRET_KEY);
+        const decoded = jwt.verifyToken(token, JWT_SECRET_KEY);
         console.log('Token decodificado:', decoded);
     
         res.status(200).send({
