@@ -22,10 +22,11 @@ class PostSchema {
 
 }
 
-import React from "react" ;
+import React , { useEffect , useState } from "react" ;
 import gs from "../../Styles" ;
 import { View , Alert } from "react-native" ;
 import { FlatList , Post , Button } from "../Library" ;
+import AsyncStorage from '@react-native-async-storage/async-storage' ;
 
 const PostsListTest = (  ) => {
 
@@ -60,47 +61,59 @@ const PostsListTest = (  ) => {
         new PostSchema( '10' , 'Gato elegante' , 'Un gato mostrando su elegancia.' , 
             [ 'https://placekitten.com/254/300' , 'https://placekitten.com/255/300' , 'https://placekitten.com/256/300' , 
                 'https://placekitten.com/257/300' , 'https://placekitten.com/258/300' , 'https://placekitten.com/259/300'] )
-    ] ;      
+    ] ;  
+
+    const [ isUserLoggedIn , setIsUserLoggedIn ] = useState( false ) ;
+
+    useEffect( () => {
+        const checkLoginStatus = async () => {
+            const userToken = await AsyncStorage.getItem( 'accessToken' ) ;
+            console.log( userToken ) ;
+            setIsUserLoggedIn( userToken !== null ) ;
+        } ;
+    
+        checkLoginStatus();
+    }, []);
 
     //console.log( posts ) ;
 
+    const buttonsPost = ( isUserLoggedIn ) ? [
+            <Button 
+                iconName='bookmark' type="icon" size='sm' key="Save" 
+                onPressAction={ () => {
+                    Alert.alert(
+                        title = "Post Guardado" ,
+                        'Se ha guardado el post : "' + item.item.title + '" con id : ' + item.item.id ,
+                        [
+                            { text: "OK" , onPress: () => console.log("OK Pressed") }
+                        ] ,  
+                        { cancelable: true } 
+                    )
+                } }
+            /> ,
+            <Button 
+                iconName='heart' type="icon" size='sm' key="Like" 
+                onPressAction={ () => {
+                    Alert.alert(
+                        title = "Me Gusta Post" ,
+                        'Le ha dado me gusta guardado al post : "' + item.item.title + '" con id : ' + item.item.id ,
+                        [
+                            { text: "OK" , onPress: () => console.log("OK Pressed") }
+                        ] ,  
+                        { cancelable: true } 
+                    )
+                } }
+            />
+        ] : [] ;
 
-    /* //TODO: El ojo debe activar una modal que tenga una vista de card normal incluyendo los botones de eliminar la imagen */
     const renderPost = ( item ) => {
         return(
             <Post 
                 title={item.item.title} 
                 multimedia={item.item.multimedia} 
                 paragraph={item.item.description}
-                buttons={[
-                    <Button 
-                        iconName='bookmark' type="icon" size='sm' key="Save" 
-                        onPressAction={ () => {
-                            Alert.alert(
-                                title = "Post Guardado" ,
-                                'Se ha guardado el post : "' + item.item.title + '" con id : ' + item.item.id ,
-                                [
-                                    { text: "OK" , onPress: () => console.log("OK Pressed") }
-                                ] ,  
-                                { cancelable: true } 
-                            )
-                        } }
-                    /> ,
-                    <Button 
-                        iconName='heart' type="icon" size='sm' key="Like" 
-                        onPressAction={ () => {
-                            Alert.alert(
-                                title = "Me Gusta Post" ,
-                                'Le ha dado me gusta guardado al post : "' + item.item.title + '" con id : ' + item.item.id ,
-                                [
-                                    { text: "OK" , onPress: () => console.log("OK Pressed") }
-                                ] ,  
-                                { cancelable: true } 
-                            )
-                        } }
-                    />
-                ]}
-                isSeeMoreActive={true}
+                buttons={buttonsPost}
+                isSeeMoreActive={isUserLoggedIn}
             />
         );
     };

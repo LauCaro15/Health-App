@@ -9,7 +9,7 @@ import Stacks  from './src/navigate/Stacks';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [userRegistered,setUserRegistered] = useState(false);
+  const [ userRegistered , setUserRegistered ] = useState(false);
 
   const handleRegistrationComplete = ()=> {
     setUserRegistered(!userRegistered);
@@ -18,9 +18,10 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      <Stacks>
+      <TestsSample/>
+      {/* <Stacks>
         <TestsSample/>
-      </Stacks>
+      </Stacks> */}
       
       {/* <MainNavigator></MainNavigator> */}
 

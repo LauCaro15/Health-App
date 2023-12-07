@@ -118,8 +118,8 @@ export const TheMultimediaSwiper2 = ({
 
             paginationDefaultColor = {c.neutral.greyLightest}
             paginationActiveColor = {c.primary.base}
+        
         >
-
         </SwiperFlatList>
     )
 }
