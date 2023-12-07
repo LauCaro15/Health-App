@@ -47,6 +47,7 @@ const CreatePost = () => {
       })
       .then(data => {
         console.log("Data new post: ", data);
+        navigation.navigate("PostsUser");
         setModalVisible(false);
         setImages([]);
       })

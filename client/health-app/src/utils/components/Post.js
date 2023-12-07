@@ -54,6 +54,8 @@ export const ThePost = ({
 
 	const widthAddSlider = s.medium.m1 ;
 
+	( userRole !== 'client' ) ? buttons=[] : null ;
+
 	if ( isSeeMoreActive ) {
 		buttons.unshift( 
 			<SeeMoreModal title={title} paragraph={paragraph} multimedia={multimedia} userRole={userRole}/>
@@ -111,7 +113,7 @@ export const ThePost = ({
 				( buttons.length<=0 || userRole === 'guess' ) ? {display: 'none'} : null ,
 				{ marginVertical: s.tiny.t1 * -1  }
 				]}>
-				{buttons}
+				{ buttons}
 			</View>
 		
 		</Card>

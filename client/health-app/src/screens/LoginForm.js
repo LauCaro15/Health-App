@@ -41,6 +41,11 @@ const LoginForm = () => {
       await AsyncStorage.setItem("role", role);
 
       console.log(role);
+      
+      const userId = data.user_id;
+      await AsyncStorage.setItem("userId", userId);
+
+      console.log(userId);
 
       Alert.alert(
         "Inicio de sesión exitoso",

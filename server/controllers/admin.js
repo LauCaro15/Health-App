@@ -61,6 +61,7 @@ const login = async (req, res) => {
         res.status(200).send({
             access: token,
             rol: decoded.role,
+            user_id: decoded.user_id,
         });
     } catch (error) {
         res.status(403).send({ msg: error.message });
@@ -72,7 +73,7 @@ const login = async (req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const admins = await User.find();
+        const admins = await Admin.find();
         res.status(200).json(admins);
     } catch (err) {
         res.status(400).json(err);

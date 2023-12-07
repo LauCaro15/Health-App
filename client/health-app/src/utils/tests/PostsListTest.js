@@ -67,14 +67,16 @@ const PostsListTest = (  ) => {
     const [ isUserLoggedIn , setIsUserLoggedIn ] = useState( false ) ;
     const [ userRole , setUserRole ] = useState( 'guess' ) ;
     const navigation = useNavigation() ;
+    const userId = AsyncStorage.getItem( 'userId' ) ;
 
     const ip = "192.168.1.2" ;
-    const url = `http://${ip}:3000/api/v1/posts` ;
+    const url = `http://${ip}:3000/api/v1/clients/${userId}` ;
 
     useEffect( () => {
         const checkLoginStatus = async () => {
             const userToken = await AsyncStorage.getItem( 'accessToken' ) ;
             setIsUserLoggedIn( userToken !== null ) ;
+            
 
             const userRole = await AsyncStorage.getItem( 'role' ) ;
             setUserRole( ( userRole ) ? userRole : 'guess' ) ;
@@ -91,9 +93,8 @@ const PostsListTest = (  ) => {
     const handleLikePost = async ( postId ) => {
 
         console.log( "Post id : ", postId ) ;
-
         try {
-            const response = await axios.post( url+`/like` , { id: postId } ) ;
+            const response = await axios.post( url+`/addLike` , { id_post: postId } ) ;
             console.log( response.data ) ;
         } catch ( error ) {
             console.error( error );
@@ -105,7 +106,7 @@ const PostsListTest = (  ) => {
         console.log( "Post id : ", postId ) ;
 
         try {
-            const response = await axios.post( url+`/collect` , { id: postId } ) ;
+            const response = await axios.post( url+`/addCollection` , { id_post: postId } ) ;
             console.log( response.data ) ;
         } catch ( error ) {
             console.error( error );

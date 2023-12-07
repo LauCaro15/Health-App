@@ -17,6 +17,7 @@ export default function App() {
     const removeData = async () => {
       await AsyncStorage.removeItem('accessToken') ;
       await AsyncStorage.removeItem('role') ;
+      await AsyncStorage.removeItem('userId') ;
     } ;
     removeData() ;
   } , [] ) ;

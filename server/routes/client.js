@@ -8,4 +8,7 @@ router.post("/register" , clientController.register );
 router.post("/login" , clientController.login );
 router.get("/" , clientController.getAll );
 
+router.put("/:id/addLike" , clientController.addLike );
+router.put("/:id/addCollection" , clientController.addCollection );
+
 module.exports = router;

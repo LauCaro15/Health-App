@@ -67,16 +67,43 @@ const login = async (req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const clients = await User.find();
+        const clients = await Client.find();
         res.status(200).json(clients);
     } catch (err) {
         res.status(400).json(err);
     }
 }
 
+const addLike = async (req, res) => {
+    const { id } = req.params;
+    const { id_post } = req.body;
+    try {
+        const client = await User.findById(id);
+        client.likes.push(id_post);
+        await client.save();
+        res.status(200).json(client);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+}
+
+const addCollection = async (req, res) => {
+    const { id } = req.params;
+    const { id_post } = req.body;
+    try {
+        const client = await User.findById(id);
+        client.collections.push(id_post);
+        await client.save();
+        res.status(200).json(client);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+}
 
 module.exports = {
     register,
     login,
     getAll,
+    addLike,
+    addCollection
 }
