@@ -1,6 +1,18 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = require("../config");
 
+function getRoleFromEmail(email) {
+    // Obtener el dominio del correo electrónico
+    const domain = email.split('@')[1];
+
+    // Verificar si el dominio es "admin.com"
+    if (domain && domain.toLowerCase() === 'admin.com') {
+        return 'admin';
+    } else {
+        return 'client'; // Asignar otro rol si no es "admin.com"
+    }
+}
+
 const createAccessToken = (user) => {
     console.log(user);
     const expToken = new Date();
@@ -10,6 +22,7 @@ const createAccessToken = (user) => {
         user_id: user._id,
         iat: Date.now(),
         exp: expToken.getTime(),
+        role: getRoleFromEmail(user.email),
     };
 
     console.log("accessToken del jwt: ", payload.user_id);

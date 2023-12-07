@@ -4,17 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require("../utils/jwt");
 
 
-// GET ME
-const getMe = async (req, res) => {
-    try {
-        const user = await User.findById(req.user.user_id);
-        res.status(200).json(user);
-    } catch (err) {
-        res.status(400).json(err);
-    }
-}
-
-
 //POST
 const register = async (req, res) => {
     const { name, lastname, email, password } = req.body;
@@ -29,7 +18,6 @@ const register = async (req, res) => {
             lastname,
             email: email.toLowerCase(),
             password: final_password,
-            rol: "User"
         });
         console.log("Usuario creado:" + new_user);
         const userDB = await new_user.save();

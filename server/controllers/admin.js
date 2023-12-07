@@ -5,17 +5,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require("../utils/jwt");
 
 
-// GET ME
-const getMe = async (req, res) => {
-    try {
-        const admin = await User.findById(req.admin.admin_id);
-        res.status(200).json(admin);
-    } catch (err) {
-        res.status(400).json(admin);
-    }
-}
-
-
 //POST
 const register = async (req, res) => {
     const { name, lastname, email, password } = req.body;
@@ -30,7 +19,7 @@ const register = async (req, res) => {
             lastname,
             email: email.toLowerCase(),
             password: final_password,
-            posts : ["1","2"],
+            posts : [],
         });
 
         console.log("Administrador creado:" + new_admin);
@@ -64,8 +53,13 @@ const login = async (req, res) => {
         if (!clientStore.active) {
             throw new Error("Usuario no autorizado o no activo");
         }
+        
+        const decoded = jwt.verify(token, JWT_SECRET_KEY);
+        console.log('Token decodificado:', decoded);
+    
         res.status(200).send({
             access: jwt.createAccessToken(clientStore),
+            rol: decoded.role,
         });
     } catch (error) {
         res.status(403).send({ msg: error.message });
@@ -89,5 +83,4 @@ module.exports = {
     register,
     login,
     getAll,
-    getMe,
 }
