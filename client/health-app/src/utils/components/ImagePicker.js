@@ -1,0 +1,30 @@
+import React, { useState, useEffect } from 'react';
+import { Image, View, Platform } from 'react-native';
+import { Button } from '../Library';
+import * as ImagePicker from 'expo-image-picker';
+
+export default function ImagePickerExample({ onImageSelect }) {
+  const [images, setImages] = useState([]);
+
+  const pickImages = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsMultipleSelection: true, // Permite seleccionar múltiples imágenes
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      const selectedImages = result.assets;
+      setImages(selectedImages);
+      onImageSelect(selectedImages); // Llama a la función onImageSelect con las imágenes seleccionadas
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', margin: 0, padding: 0 }}>
+      <Button text="Pick images from camera roll" onPressAction={pickImages} />
+    </View>
+  );
+}

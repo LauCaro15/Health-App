@@ -10,6 +10,7 @@ import Posts from "../screens/Posts" */
 import RegisterForm from '../screens/RegisterForm';
 import LoginForm from '../screens/LoginForm';
 import PostsListTest from '../utils/tests/PostsListTest';
+import CreatePost from '../screens/CreatePost';
 /* import Case1 from "../screens/Case1" */
 // import MainNavigator from './MainNavigator';
 
@@ -62,6 +63,11 @@ const Stacks = () => {
             name="PostsUser"
             component={PostsListTest}
             options={{ title: "Posts" }} // Personaliza el título del encabezado
+        />
+        <Stack.Screen
+            name="CreatePost"
+            component={CreatePost}
+            options={{ title: "Creación Post" }} // Personaliza el título del encabezado
         />
         {/* <Stack.Screen
             name="PedometerAPP"
