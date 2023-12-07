@@ -7,7 +7,36 @@ import Swiper from "./Swiper" ;
 import Button from "./Button" ;
 import Modal from "./Modal" ;
 import { Card } from "@rneui/base" ;
-import TheCard from "./Card"
+import TheCard from "./Card" ;
+import AsyncStorage from '@react-native-async-storage/async-storage' ;
+
+const SeeMoreModal = memo( ({ title , paragraph , multimedia , userRole }) => (
+	<Modal 
+		OpenButton={
+			<Button iconName='eye' type="icon" size='sm' key="See" />
+		}
+		Component={
+			<TheCard
+				title = {title}
+				paragraph = {paragraph}
+				images = {multimedia}
+				styleImages={{
+					...( ( userRole == 'admin' ) ? { nameIcon: 'trash' , 
+						containerIcon: { backgroundColor: c.semantic.error } } : {} ) ,
+					width: s.large.l6 , height: s.medium.m10
+				}}
+				width = '100%'
+			/> 
+		}
+		CloseButton={
+			<Button
+				iconName='close' type="circle" size="sm" iconSize={s.tiny.t8} key="Close" 
+			/>
+		}
+		>
+	</Modal>
+) ) ;
+
 
 export const ThePost = memo ( ({
     
@@ -19,43 +48,19 @@ export const ThePost = memo ( ({
 	paragraph = "" ,
 	buttons = [] ,
 	isSeeMoreActive = false ,
+	userRole = 'guess'
 	
 }) => {
 
 	const widthAddSlider = s.medium.m1 ;
 
 	if ( isSeeMoreActive ) {
-		buttons.unshift(
-			<Modal 
-				OpenButton={
-					<Button iconName='eye' type="icon" size='sm' key="See" />
-				}
-				Component={
-					<TheCard
-						title = {title}
-						paragraph = {paragraph}
-						images = {multimedia}
-						styleImages={{
-							nameIcon: 'trash' ,
-							containerIcon: {
-								backgroundColor: c.semantic.error
-							} ,
-							width: s.large.l6 ,
-							height: s.medium.m10
-						}}
-						width = '100%'
-					/> 
-                }
-                CloseButton={
-                    <Button
-                        iconName='close' type="circle" size="sm" iconSize={s.tiny.t8}
-                        key="Close" 
-                    />
-                }
-                >
-			</Modal>
-		);
+		buttons.unshift( 
+			<SeeMoreModal title={title} paragraph={paragraph} multimedia={multimedia} userRole={userRole}/>
+		) ;
 	}
+
+	//console.log( "Post:" , userRole )
 
 	return (
 		<Card 
@@ -103,7 +108,7 @@ export const ThePost = memo ( ({
 				styles.group ,
 				{ justifyContent: 'flex-end' } , 
 				styles.contentItem ,
-				( buttons.length<=0 ) ? {display: 'none'} : null ,
+				( buttons.length<=0 || userRole === 'guess' ) ? {display: 'none'} : null ,
 				{ marginVertical: s.tiny.t1 * -1  }
 				]}>
 				{buttons}

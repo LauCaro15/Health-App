@@ -17,7 +17,7 @@ const LoginForm = () => {
     console.log("Password", password);
     try {
       const response = await fetch(
-        `http://${ip}:3500/api/v1/users/login`,
+        `http://${ip}:3500/api/v1/admins/login`,
         {
           method: "POST",
           headers: {
@@ -35,6 +35,11 @@ const LoginForm = () => {
       await AsyncStorage.setItem("accessToken", accessToken);
 
       console.log(accessToken);
+
+      const role = data.rol;
+      await AsyncStorage.setItem("role", role);
+
+      console.log(role);
 
       Alert.alert(
         "Inicio de sesión exitoso",

@@ -178,104 +178,6 @@ export const TheColorBlockCard = ({
 
 } ;
 
-export const ThePostCard = memo ( ({
-    
-	title = "" ,
-	multimedia = [] , // Recibe uris no locales
-	maxQuantity = 5 ,
-	width = 'auto' ,
-	imageSwiperSize = s.gigantic.g10 ,
-	paragraph = "" ,
-	buttons = [] ,
-	isSeeMoreActive = false ,
-	
-}) => {
-
-	if ( isSeeMoreActive ) {
-		buttons.unshift(
-			<Modal 
-				OpenButton={
-					<Button iconName='eye' type="icon" size='sm' key="See" />
-				}
-				Component={
-					<TheCard
-						title = {title}
-						paragraph = {paragraph}
-						images = {multimedia}
-						styleImages={{
-							nameIcon: 'trash' ,
-							containerIcon: {
-								backgroundColor: c.semantic.error
-							} ,
-							width: s.large.l6 ,
-							height: s.medium.m10
-						}}
-						width = '100%'
-					/> 
-				}>
-				
-			</Modal>
-		);
-	}
-
-	return (
-		<Card 
-			containerStyle = {[ 
-				styles.container ,
-				( width === '100%' ) ? 
-					{ flexGrow: 1 , flexShrink: 0 , flexBasis: '96%' } : 
-					( width === 'auto') ? { flexGrow: 1 , flexShrink: 0 } : { width: width } ,
-				{ paddingHorizontal:  s.tiny.t4 } ,
-				{ justifyContent: 'center' }
-			]}
-		>
-			<View style={[
-				styles.group ,
-				{ justifyContent: 'center' , alignItems: 'center' } , 
-				styles.contentItem ,
-				( multimedia.length<=0 ) ? {display: 'none'} : null ,
-				{ marginBottom: 0 } ,
-				{ overflow: 'hidden' , alignSelf: 'center' , width: 'auto' }
-				]}>
-				<Swiper 
-					multimedia = {multimedia} 
-					width = {imageSwiperSize} 
-					height = {imageSwiperSize} 
-					maxQuantity = {maxQuantity}
-					widthAddSlider = {s.medium.m1}
-				/>
-			</View>
-
-			<Card.Title style={[ 
-				gs.text  , gs.subtitle , 
-				{ marginBottom: 0 , marginTop: s.tiny.t2 , padding: 0 } , 
-				( !title ) ? { display: 'none' } : null  
-			]}> {title} </Card.Title>
-
-			<Text 
-				style={[ 
-					gs.text , 
-					( paragraph === "" ) ? {display: 'none'} : null  , 
-					styles.contentItem
-				]}
-			>{paragraph}</Text>
-
-			<View style={[
-				styles.group ,
-				{ justifyContent: 'flex-end' } , 
-				styles.contentItem ,
-				( buttons.length<=0 ) ? {display: 'none'} : null ,
-				{ marginVertical: s.tiny.t1 * -1  }
-				]}>
-				{buttons}
-			</View>
-		
-		</Card>
-		
-	) ;
-
-} ) ;
-
 const styles = StyleSheet.create({
 
 	container: {
@@ -307,4 +209,3 @@ const styles = StyleSheet.create({
 export default TheCard ;
 export const ImageCard = TheImageCard ;
 export const ColorBlockCard = TheColorBlockCard ;
-export const PostCard = ThePostCard ;

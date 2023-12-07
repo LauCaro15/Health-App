@@ -13,17 +13,21 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
 
-  useEffect( async() => {
-    await AsyncStorage.removeItem("accessToken");
-  }, []);
+  useEffect( () => {
+    const removeData = async () => {
+      await AsyncStorage.removeItem('accessToken') ;
+      await AsyncStorage.removeItem('role') ;
+    } ;
+    removeData() ;
+  } , [] ) ;
 
   return (
     <NavigationContainer>
 
-      <TestsSample/>
-      {/* <Stacks>
+      {/* <TestsSample/> */}
+      <Stacks>
         <TestsSample/>
-      </Stacks> */}
+      </Stacks>
       
       {/* <MainNavigator></MainNavigator> */}
 

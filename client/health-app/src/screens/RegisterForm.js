@@ -23,7 +23,7 @@ const RegisterForm = () => {
       alert('Debes aceptar la política de privacidad para registrarte');
       return;
     }
-    const url = `http://${ip}:3500/api/v1/users/register`;
+    const url = `http://${ip}:3500/api/v1/clients/register`;
 
     const data = {
       name: userName,

@@ -64,56 +64,60 @@ const PostsListTest = (  ) => {
     ] ;  
 
     const [ isUserLoggedIn , setIsUserLoggedIn ] = useState( false ) ;
+    const [ userRole , setUserRole ] = useState( 'guess' ) ;
 
     useEffect( () => {
         const checkLoginStatus = async () => {
             const userToken = await AsyncStorage.getItem( 'accessToken' ) ;
-            console.log( userToken ) ;
             setIsUserLoggedIn( userToken !== null ) ;
+
+            const userRole = await AsyncStorage.getItem( 'role' ) ;
+            setUserRole( ( userRole ) ? userRole : 'guess' ) ;
+            console.log( userRole ) ;
         } ;
     
         checkLoginStatus();
-    }, []);
+    } , [] ) ;
 
     //console.log( posts ) ;
 
-    const buttonsPost = ( isUserLoggedIn ) ? [
-            <Button 
-                iconName='bookmark' type="icon" size='sm' key="Save" 
-                onPressAction={ () => {
-                    Alert.alert(
-                        title = "Post Guardado" ,
-                        'Se ha guardado el post : "' + item.item.title + '" con id : ' + item.item.id ,
-                        [
-                            { text: "OK" , onPress: () => console.log("OK Pressed") }
-                        ] ,  
-                        { cancelable: true } 
-                    )
-                } }
-            /> ,
-            <Button 
-                iconName='heart' type="icon" size='sm' key="Like" 
-                onPressAction={ () => {
-                    Alert.alert(
-                        title = "Me Gusta Post" ,
-                        'Le ha dado me gusta guardado al post : "' + item.item.title + '" con id : ' + item.item.id ,
-                        [
-                            { text: "OK" , onPress: () => console.log("OK Pressed") }
-                        ] ,  
-                        { cancelable: true } 
-                    )
-                } }
-            />
-        ] : [] ;
-
     const renderPost = ( item ) => {
+
         return(
             <Post 
                 title={item.item.title} 
                 multimedia={item.item.multimedia} 
                 paragraph={item.item.description}
-                buttons={buttonsPost}
+                buttons={ [
+                    <Button 
+                        iconName='bookmark' type="icon" size='sm' key="Save" 
+                        onPressAction={ () => {
+                            Alert.alert(
+                                title = "Post Guardado" ,
+                                'Se ha guardado el post : "' + item.item.title + '" con id : ' + item.item.id ,
+                                [
+                                    { text: "OK" , onPress: () => console.log("OK Pressed") }
+                                ] ,  
+                                { cancelable: true } 
+                            )
+                        } }
+                    /> ,
+                    <Button 
+                        iconName='heart' type="icon" size='sm' key="Like" 
+                        onPressAction={ () => {
+                            Alert.alert(
+                                title = "Me Gusta Post" ,
+                                'Le ha dado me gusta guardado al post : "' + item.item.title + '" con id : ' + item.item.id ,
+                                [
+                                    { text: "OK" , onPress: () => console.log("OK Pressed") }
+                                ] ,  
+                                { cancelable: true } 
+                            )
+                        } }
+                    />
+                ] }
                 isSeeMoreActive={isUserLoggedIn}
+                userRole={userRole}
             />
         );
     };
@@ -131,4 +135,4 @@ const PostsListTest = (  ) => {
 
 } ;
 
-export default PostsListTest;
+export default PostsListTest ;
